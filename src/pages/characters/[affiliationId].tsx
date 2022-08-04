@@ -1,3 +1,4 @@
+import { clsx } from 'clsx';
 import Link from 'next/link';
 
 export default function CharacterAffiliations({
@@ -5,25 +6,52 @@ export default function CharacterAffiliations({
   affiliationId,
 }: any) {
   return (
-    <div>
-      <h1>Characters affiliated {affiliationId}</h1>
-      <ul>
-        {characters.map((character: any) => {
-          return (
-            // eslint-disable-next-line no-underscore-dangle
-            <div key={character._id}>
-              <li className="font-bold">{character.name}</li>
-              <Link
-                // eslint-disable-next-line no-useless-concat
-                href={'/characters/byId/' + `${character._id}`}
+    <div className="overflow-hidden">
+      <div className={clsx('fixed h-[25vh] w-full bg-blue-900')}>
+        <h1 className="p-5 align-bottom text-5xl font-bold text-white">
+          {affiliationId} Nation
+        </h1>
+      </div>
+      <div className="h-[25vh]"></div>
+      <div className="overflow-auto pt-2">
+        <p className="m-1 px-20 py-2 text-3xl font-semibold text-green-400">
+          Characters
+        </p>
+        <ul>
+          {characters.map((character: any) => {
+            return (
+              // eslint-disable-next-line no-underscore-dangle
+              <div
                 key={character._id}
+                className="my-2 mx-20 flex flex-row rounded-md p-5 shadow-md"
               >
-                <p className="hover:bg-green-300">View Details</p>
-              </Link>
-            </div>
-          );
-        })}
-      </ul>
+                <img
+                  src={character.photoUrl}
+                  alt="Character Picture"
+                  height={65}
+                  width={55}
+                  className="rounded-full"
+                />
+                <li className="w-full">
+                  <h1 className="py-1 px-3 text-lg font-bold">
+                    {character.name}
+                  </h1>
+                  <p className="px-3">{character.affiliation}</p>
+                </li>
+                <Link
+                  // eslint-disable-next-line no-useless-concat
+                  href={'/characters/byId/' + `${character._id}`}
+                  key={character._id}
+                >
+                  <a className="right-3 m-auto h-[40px] w-[150px] content-center rounded-full bg-green-400 py-2 text-center text-sm font-bold text-white hover:bg-green-600">
+                    View Details
+                  </a>
+                </Link>
+              </div>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 }
