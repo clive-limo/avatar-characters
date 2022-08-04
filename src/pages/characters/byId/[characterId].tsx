@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function CharacterDetails({ details }: any) {
+export default function CharacterDetails({ details, characterId }: any) {
   const src = details.photoUrl;
   const { enemies } = details;
   return (
@@ -26,10 +26,11 @@ export default function CharacterDetails({ details }: any) {
 
 export async function getServerSideProps({ params }: any) {
   const { characterId } = params;
+
   const details = await fetch(
     `https://last-airbender-api.herokuapp.com/api/v1/characters/${characterId}`
   ).then((res) => res.json());
-
+  console.log(details);
   return {
     props: {
       details,

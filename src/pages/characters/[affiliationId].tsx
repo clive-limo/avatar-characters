@@ -4,8 +4,6 @@ export default function CharacterAffiliations({
   characters,
   affiliationId,
 }: any) {
-  // eslint-disable-next-line no-underscore-dangle
-  const characterID = characters._id;
   return (
     <div>
       <h1>Characters affiliated {affiliationId}</h1>
@@ -17,8 +15,8 @@ export default function CharacterAffiliations({
               <li className="font-bold">{character.name}</li>
               <Link
                 // eslint-disable-next-line no-useless-concat
-                href={'/characters/byId/' + `${characterID}`}
-                key={characterID}
+                href={'/characters/byId/' + `${character._id}`}
+                key={character._id}
               >
                 <p className="hover:bg-green-300">View Details</p>
               </Link>
